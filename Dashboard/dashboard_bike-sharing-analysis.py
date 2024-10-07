@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 st.title('Bike Rental Analysis Dashboard')
 
 # Define the paths to CSV files
-day_path = "day.csv"
-hour_path = "hour.csv"
+day_path = "Dashboard/day.csv"
+hour_path = "Dashboard/hour.csv"
 
 # Using pandas library to read the data from .csv file
 day_df = pd.read_csv(day_path, delimiter=",")
