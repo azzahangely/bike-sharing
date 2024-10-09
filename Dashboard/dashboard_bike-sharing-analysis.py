@@ -23,23 +23,17 @@ st.write(hour_df.head())
 
 # Analysis and Visualizations for Day Data
 
-# Dropdown for selecting which dataset to visualize
-data_choice = st.selectbox("Choose the dataset for analysis:", ["Day Data", "Hour Data"])
+# Scatter plots for environmental factors in day data
+st.subheader('Scatter Plots for Environmental Factors (Day Data)')
+environmental_vars = ['temp', 'atemp', 'hum', 'windspeed']
+fig, axs = plt.subplots(2, 2, figsize=(12, 10))
+axs = axs.flatten()
 
-if data_choice == "Day Data":
-    # Analysis and Visualizations for Day Data
-
-    # Scatter plots for environmental factors in day data
-    st.subheader('Scatter Plots for Environmental Factors (Day Data)')
-    environmental_vars = ['temp', 'atemp', 'hum', 'windspeed']
-    fig, axs = plt.subplots(2, 2, figsize=(12, 10))
-    axs = axs.flatten()
-
-    for i, var in enumerate(environmental_vars):
-        sns.scatterplot(x=day_df[var], y=day_df['cnt'], ax=axs[i])
-        axs[i].set_title(f'{var.capitalize()} vs Rentals')
-        axs[i].set_xlabel(var.capitalize())
-        axs[i].set_ylabel('Count of Rentals')
+for i, var in enumerate(environmental_vars):
+    sns.scatterplot(x=day_df[var], y=day_df['cnt'], ax=axs[i])
+    axs[i].set_title(f'{var.capitalize()} vs Rentals')
+    axs[i].set_xlabel(var.capitalize())
+    axs[i].set_ylabel('Count of Rentals')
 
     plt.tight_layout()
     st.pyplot(fig)
@@ -65,26 +59,25 @@ if data_choice == "Day Data":
 *** The analysis indicates that bike rentals are **positively influenced by higher temperatures**, with both temperature and apparent temperature showing a positive correlation with rental counts, suggesting that favorable weather conditions encourage biking. On the other hand, higher humidity and wind speed are associated with a decline in rentals, indicating that poor weather conditions deter users from renting bike.
 """)
 
-elif data_choice == "Hour Data":
         # Hourly rentals analysis from hour data
-        st.subheader('Hourly Rentals by Season (Hour Data)')
-        hourly_season_rentals = hour_df.groupby(['hr', 'season'])['cnt'].mean().unstack()
+st.subheader('Hourly Rentals by Season (Hour Data)')
+hourly_season_rentals = hour_df.groupby(['hr', 'season'])['cnt'].mean().unstack()
 
         # Line plot for hourly rentals by season
-        plt.figure(figsize=(12, 6))
-        for season in range(1, 5):  # 1 to 4 for each season
-            plt.plot(hourly_season_rentals.index, hourly_season_rentals[season], label=f'Season {season}')
+plt.figure(figsize=(12, 6))
+for season in range(1, 5):  # 1 to 4 for each season
+    plt.plot(hourly_season_rentals.index, hourly_season_rentals[season], label=f'Season {season}')
 
-        plt.title('Average Bike Rentals by Hour Across Seasons (Hour Data)')
-        plt.xlabel('Hour of the Day')
-        plt.ylabel('Average Rentals')
-        plt.xticks(range(0, 24))  # Show hours from 0 to 23
-        plt.legend(title='Season', loc='upper right')
-        plt.grid()
-        st.pyplot(plt)
-        # Insights and Conclusions
-        st.subheader('Insights and Conclusions')
-        st.write("""
+    plt.title('Average Bike Rentals by Hour Across Seasons (Hour Data)')
+    plt.xlabel('Hour of the Day')
+    plt.ylabel('Average Rentals')
+    plt.xticks(range(0, 24))  # Show hours from 0 to 23
+    plt.legend(title='Season', loc='upper right')
+    plt.grid()
+    st.pyplot(plt)
+    # Insights and Conclusions
+    st.subheader('Insights and Conclusions')
+    st.write("""
         **Insight:**
         - **Insight:**
         - From the hourly trends across all the seasons, it shows that in the early morning, 0 - 6, for spring season the average rentals are relatively low.

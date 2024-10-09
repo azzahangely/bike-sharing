@@ -33,7 +33,7 @@ git clone https://github.com/azzahangely/bike-sharing.git
 Once your clone is set up, you can run the Streamlit dashboard to visualize the analysis i have made. From your terminal, use the following command:
 
 ```bash
-streamlit run dashboard_bike-sharing-analysis.py
+streamlit run Dashboard/dashboard_bike-sharing-analysis.py
 ```
 
 This will launch a local Streamlit server where you can explore the visualizations and insights from the analysis in a user-friendly dashboard.
